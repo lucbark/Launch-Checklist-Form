@@ -1,8 +1,25 @@
 // Write your JavaScript code here!
+
 //Adding Alerts
 window.addEventListener("load", function() {
+   /* This block of code shows how to format the HTML once you fetch some planetary JSON!
+<h2>Mission Destination</h2>
+<ol>
+   <li>Name: ${}</li>
+   <li>Diameter: ${}</li>
+   <li>Star: ${}</li>
+   <li>Distance from Earth: ${}</li>
+   <li>Number of Moons: ${}</li>
+</ol>
+<img src="${}">
+*/
+   
+   
    let form = document.querySelector("form");
+   
+   
    form.addEventListener("submit", function(event) {
+      event.preventDefault();
       let pilotName = document.querySelector("input[name=pilotName]");
       let copilotName = document.querySelector("input[name=copilotName]");
       let fuelLevel = document.querySelector("input[name=fuelLevel]");
@@ -11,7 +28,7 @@ window.addEventListener("load", function() {
          if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === "") {
             alert("Oops, you forgot something. All fields are required!");
          // stop the form submission
-         event.preventDefault();
+         
          }
 
       // let shuttleArrary = []
@@ -64,12 +81,38 @@ window.addEventListener("load", function() {
          if (isNaN(fuelLevelValue) || isNaN(cargoMassValue)) {
             alert("Uh oh! Someone did not enter valid info :/");
             // stop the form submission
-            event.preventDefault();
+            
             }
 
       document.getElementById("pilotStatus").innerHTML = `${pilotNameValue} is good to go.`;
-      document.getElementById("copilotStatus").innerHTML = `${copilotNameValue} is ready to shake and bake!`
-      
+      document.getElementById("copilotStatus").innerHTML = `${copilotNameValue} is ready to shake and bake!`;
+      let fuelStatus = document.getElementById("fuelStatus")
+      let cargoStatus = document.getElementById("cargoStatus")
+      let faultyItems = document.getElementById("faultyItems");
+      let launchStatus = document.getElementById("launchStatus");
+
+      if (Number(fuelLevelValue)<10000) {
+         faultyItems.style.visibility = "visible";
+         fuelStatus.innerHTML = `${fuelLevelValue}L isn't going to get us far...`;
+         launchStatus.innerHTML = `Where Do You Think You're Going???`;
+         launchStatus.style.color = "red";
+
+      };
+
+      if(Number(cargoMassValue)>10000) {
+         faultyItems.style.visibility = "visible";
+         cargoStatus.innerHTML = `Y'all need to lose some weight! ${cargoMassValue} is too much.`;
+         launchStatus.innerHTML = `Where Do You Think You're Going???`;
+         launchStatus.style.color = "red";
+
+      };
+
+      if(Number(fuelLevelValue) >= 10000 && Number(cargoMassValue) <= 10000) {
+         faultyItems.style.visibility = "visible";
+         launchStatus.innerHTML = `Tonight We Fly!!!`;
+         launchStatus.style.color = "green";
+      };
+
    });
 
 });

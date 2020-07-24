@@ -6,8 +6,12 @@ div {
     text-align: left;
 }
 
+#launchStatus {
+    color: black;
+}
+
 #faultyItems {
-    visibility: visible;   
+    visibility: hidden;   
 }
 
 #launchForm {
