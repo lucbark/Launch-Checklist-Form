@@ -1,3 +1,7 @@
+body {
+    font-family: "Helvetica Neue";
+}
+
 h1 {
     text-align: center;
 }
@@ -8,6 +12,7 @@ div {
 
 #launchStatus {
     color: black;
+    
 }
 
 #faultyItems {

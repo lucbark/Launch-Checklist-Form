@@ -2,6 +2,25 @@
 
 //Adding Alerts
 window.addEventListener("load", function() {
+
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+               // Access the JSON in the response
+               response.json().then( function(json) {
+                  //console.log(json[0]); This gets me the first object in the array. Aka Planet Tatooine
+                  const missionTarget = document.getElementById("missionTarget");
+                  missionTarget.innerHTML = `
+                  <h2> Mission Destination</h2>
+                  <ol>
+                     <li>Name: ${json[0].name}</li>
+                     <li> Diameter: ${json[0].diameter}</li>
+                     <li> Star: ${json[0].star}</li>
+                     <li> Distance from Earth: ${json[0].distance}</li>
+                     <li> Number of Moons: ${json[0].moons}</li>
+                  </ol>
+                  <img src= ${json[0].image}>`
+
+               });
+            });
    /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
 <ol>
@@ -112,6 +131,13 @@ window.addEventListener("load", function() {
          launchStatus.innerHTML = `Tonight We Fly!!!`;
          launchStatus.style.color = "green";
       };
+
+      if(cargoMassValue === "") {
+         faultyItems.style.visibility = "hidden";
+         launchStatus.innerHTML = "Awaiting Information Before Launch";
+         launchStatus.style.color = "orange";
+         launchStatus.style.fontStyle="italic"
+      }
 
    });
 
