@@ -8,16 +8,20 @@ window.addEventListener("load", function() {
                response.json().then( function(json) {
                   //console.log(json[0]); This gets me the first object in the array. Aka Planet Tatooine
                   const missionTarget = document.getElementById("missionTarget");
+                  function randomPlanet(json) {
+                     return [Math.floor(Math.random() * Math.floor(json.length))];
+                  };
+                  const planetSelected = randomPlanet(json);
                   missionTarget.innerHTML = `
                   <h2> Mission Destination</h2>
                   <ol>
-                     <li>Name: ${json[0].name}</li>
-                     <li> Diameter: ${json[0].diameter}</li>
-                     <li> Star: ${json[0].star}</li>
-                     <li> Distance from Earth: ${json[0].distance}</li>
-                     <li> Number of Moons: ${json[0].moons}</li>
+                     <li>Name: ${json[planetSelected].name}</li>
+                     <li> Diameter: ${json[planetSelected].diameter}</li>
+                     <li> Star: ${json[planetSelected].star}</li>
+                     <li> Distance from Earth: ${json[planetSelected].distance}</li>
+                     <li> Number of Moons: ${json[planetSelected].moons}</li>
                   </ol>
-                  <img src= ${json[0].image}>`
+                  <img src= ${json[planetSelected].image}>`
 
                });
             });
